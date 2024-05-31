@@ -1,0 +1,32 @@
+<html>
+
+<head>
+  <script>
+    function showHint(str) {
+      if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+      } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("txtHint").innerHTML = this.responseText;
+          }
+        };
+        xmlhttp.open("GET", "gethint.php?q=" + str, true);
+        xmlhttp.send();
+      }
+    }
+  </script>
+</head>
+
+<body style="background-color: #FFD1D1;">
+  <h1 style="text-align: center;">Start typing a filename in the input field below :</h1>
+  <form action="" style="text-align: center;">
+    <label for="filename"><h2>Filename : </h2></label>
+    <input type="text" id="filename" name="filename" onkeyup="showHint(this.value)">
+  </form>
+  <p style="text-align: center;">Suggestions : <span id="txtHint"></span></p>
+</body>
+
+</html>
